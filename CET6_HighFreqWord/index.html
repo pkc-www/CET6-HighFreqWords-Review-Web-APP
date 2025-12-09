@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CET-6 间隔复习 | 交互式学习</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">CET-6</div>
+      <div class="title">间隔复习（SM-2） | 交互式学习</div>
+    </div>
+    <div class="actions">
+      <label class="btn primary">
+        导入词库 CSV
+        <input type="file" id="csvFileInput" accept=".csv" hidden />
+      </label>
+      <button class="btn" id="btnExportPlan">导出 4 天计划</button>
+      <button class="btn" id="btnResetState">重置学习状态</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>学习概览</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="value" id="statTotal">0</div>
+          <div class="label">总词条</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="statDue">0</div>
+          <div class="label">今日到期</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="statWrong">0</div>
+          <div class="label">累计错题</div>
+        </div>
+        <div class="stat">
+          <div class="value" id="statDaysLeft">4</div>
+          <div class="label">距离考试（天）</div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="btn primary" id="btnStartDue">开始今日复习</button>
+        <button class="btn" id="btnStartWrong">只练错题（到期）</button>
+      </div>
+      <p class="hint">
+        质量分指南：5 完美 | 4 基本正确 | 3 勉强正确 | 2 部分记得 | 1 很模糊 | 0 不会
+      </p>
+    </section>
+
+    <section class="panel session-panel hidden" id="sessionPanel">
+      <div class="session-header">
+        <div id="progressText">进度 0/0</div>
+        <div id="sessionMeta">EF: - | 间隔: - 天 | 复习数: - | ✓0 ✗0</div>
+        <button class="btn" id="btnExitSession">结束本轮</button>
+      </div>
+
+      <div class="card" id="wordCard">
+        <div class="card-face front" id="cardFront">
+          <div class="word" id="cardWord">--</div>
+          <div class="pos" id="cardPos">--</div>
+          <button class="btn flip" id="btnShowMeaning">显示释义与例句</button>
+        </div>
+        <div class="card-face back hidden" id="cardBack">
+          <div class="meaning" id="cardCn">--</div>
+          <div class="example" id="cardEx">--</div>
+          <div class="quality-buttons">
+            <div class="quality-label">请自评质量分：</div>
+            <div class="quality-group">
+              <button class="qbtn" data-q="0">0</button>
+              <button class="qbtn" data-q="1">1</button>
+              <button class="qbtn" data-q="2">2</button>
+              <button class="qbtn" data-q="3">3</button>
+              <button class="qbtn" data-q="4">4</button>
+              <button class="qbtn" data-q="5">5</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="session-footer">
+        <div class="tip">提示：点击卡片按钮“显示释义与例句”，再选择质量分完成评估。</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div>学习进度与状态保存在浏览器（localStorage）。建议每日完成“今日到期”的清单并导出 4 天计划。</div>
+    <div>© 2025 CET-6 Study | UI 轻量版</div>
+  </footer>
+
+  <script src="sm2.js"></script>
+</body>
+</html>
